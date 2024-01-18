@@ -29,9 +29,9 @@ print("\n08.08.2007")
 print("Это был обычный летний день. Я, как обычно, встал в 7 часов утра," +
       "позавтракал и вышел на улицу. Предо мной встал выбор: " +
       "как и все пойти на работу или, махнув на все рукой," +
-      "гулять весь день по городу.")
+      "вернуться домой.")
 print("1. Пойти на работу")
-print("2. Пойти гулять")
+print("2. Вернуться домой")
 
 first_choise = input()
 while first_choise != "1" and first_choise != "2":
@@ -40,4 +40,12 @@ while first_choise != "1" and first_choise != "2":
 
 if first_choise == "1":
     job100000(money)
-# elif first_choise == "2":
+elif first_choise == "2":
+    print("Вы приходите домой. Внезапно раздаётся телефонный звонок." +
+          "Вам звонит Тимур Фархадович - ваш начальник.")
+    print("1. Ответить")
+    print("2. Сбросить")
+    burn_chooise = input()
+    while burn_chooise != "1" and burn_chooise != "2":
+        print("Введите 1 или 2.")
+        burn_chooise = input()
