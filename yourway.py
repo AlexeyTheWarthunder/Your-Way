@@ -1,6 +1,6 @@
 import random
 
-def job100000():
+def job100000(money):
     tusks = [161, 314, 298, 512, 666, 110, 810, 911,\
              637, 483, 404, 205, 101, 789, 600, 181, 914, 515]
     for i in range(9):
@@ -12,9 +12,11 @@ def job100000():
         while answer != str(tusk_1 * tusk_2):
             print("Введите число - ответ на задачу.")
             answer = input()
+        money += 100000
 
 
-inventory = []
+money = 3000
+inventory = [money]
 print("Как вас зовут?")
 name = input()
 dream_var = ["автомобиль", "частный вертолет", "вилла в Испании", "компьютер"]
@@ -37,5 +39,5 @@ while first_choise != "1" and first_choise != "2":
     first_choise = input()
 
 if first_choise == "1":
-    job100000()
+    job100000(money)
 # elif first_choise == "2":
