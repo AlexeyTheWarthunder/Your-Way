@@ -1,4 +1,5 @@
 import random
+import time
 
 def job100000(money):
     tusks = [161, 314, 298, 512, 666, 110, 810, 911,\
@@ -45,7 +46,21 @@ elif first_choise == "2":
           "Вам звонит Тимур Фархадович - ваш начальник.")
     print("1. Ответить")
     print("2. Сбросить")
-    burn_chooise = input()
-    while burn_chooise != "1" and burn_chooise != "2":
+    burn_choise = input()
+    while burn_choise != "1" and burn_choise != "2":
         print("Введите 1 или 2.")
-        burn_chooise = input()
+        burn_choise = input()
+    if burn_choise == "1":
+        print("Необходимо сначала подключить тариф. Подключить?")
+        print("1. Да")
+        print("2. Нет")
+        no_choise = input()
+        print("Поздно. У вас уже нет выбора. Подключение...")
+        time.sleep(3)
+        print("Подключено.")
+        print("К сожалению, вы не успели ответить," +
+              "и принимаете решение перезвонить.")
+        print("Звонок...")
+        time.sleep(5)
+        print("Соединение")
+        time.sleep(5)
