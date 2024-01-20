@@ -188,6 +188,7 @@ def France(money):
 
 army = False
 burn = False
+not_enough = False
 money = 3000
 inventory = [money]
 print("Как вас зовут?")
