@@ -350,7 +350,6 @@ if burn:
             print("\n16.08.2007, Утро")
             print("Я, как обычно, шёл на работу, но на крыльце магазина " +
                   "меня ждал неприятный сюрприз - там стоял военком.")
-            army = True
             print("Я тогда подумал: единственным моим " +
                   "шансом остаётся выезд из страны.")
             print("1. Уехать из страны")
@@ -373,9 +372,55 @@ if burn:
                     else:
                         France(money)
                 else:
-                    print("После подсчета средств вы понимаете, что денег на поездку вам не хватит.")
+                    print("После подсчета средств вы понимаете," +
+                          " что денег на поездку вам не хватит.")
                     not_enough = True
             if country_choice == "2" or not_enough:
                 print("Вас забирают в армию.")
+                army = True
 
-    #if job_choice == "2":
+    if job_choice == "2":
+        print("1. Устроиться продавцом")
+        print("2. Стать контрактником")
+        part1_last_choise = input()
+        while part1_last_choise != "1" and part1_last_choise != "2":
+            print("Введите 1 или 2.")
+            part1_last_choise = input()
+        if part1_last_choise == "1":
+            money = job_shop(money)
+            print("Из воспоминаний ", name, ":", sep="")
+            print("\n16.08.2007, Утро")
+            print("Я, как обычно, шёл на работу, но на крыльце магазина " +
+                  "меня ждал неприятный сюрприз - там стоял военком.")
+            print("Я тогда подумал: единственным моим " +
+                  "шансом остаётся выезд из страны.")
+            print("1. Уехать из страны")
+            print("2. Остаться")
+            country_choice = input()
+            while country_choice != "1" and country_choice != "2":
+                print("Введите 1 или 2.")
+                country_choice = input()
+            if country_choice == "1":
+                if money >= 270000:
+                    print("Куда едем?")
+                    print("1. Германия")
+                    print("2. Франция")
+                    euro_choice = input()
+                    while euro_choice != "1" and euro_choice != "2":
+                        print("Введите 1 или 2.")
+                        euro_choice = input()
+                    if euro_choice == "1":
+                        Germany(money)
+                    else:
+                        France(money)
+                else:
+                    print("После подсчета средств вы понимаете," +
+                          " что денег на поездку вам не хватит.")
+                    not_enough = True
+            if country_choice == "2" or not_enough:
+                print("Вас забирают в армию.")
+                army = True
+        
+        if part1_last_choise == "2":
+            print("Вы добровольно идете в армию, получив выплату" + 
+                  " размером 600 тыс. рублей.")
