@@ -88,12 +88,112 @@ def job_shop(money):
     return money
 
 
+def Germany(money):
+    while money < 10000000:
+        a = random.randint(-1000, 1000)
+        while a == 0:
+            a = random.randint(-1000, 1000)
+        b = random.randint(-1000, 1000)
+        c = random.randint(-1000, 1000)
+        asi = ""
+        bs = ""
+        cs = ""
+        if b > -1:
+            bs = "+"
+        if c > -1:
+            cs = "+"
+        print(asi + str(a) + "x\u00b2" + bs + str(b) + "x" + cs + str(c))
+        discriminant = b ** 2 - 4 * a * c
+        if discriminant >= 0:
+            x1 = (-b - discriminant ** 0.5) / (2 * a)
+            x2 = (-b + discriminant ** 0.5) / (2 * a)
+            x1 = round(x1, 3)
+            x2 = round(x2, 3)
+            x1 = str(x1)
+            x2 = str(x2)
+        else:
+            x1 = "keine Gleichungswurzeln"
+            x2 = "keine Gleichungswurzeln"
+        xset = {x1, x2}
+        print("Geben Sie zwei Zahlen ein – die Wurzeln der Gleichung, " +
+              " und runden Sie sie auf Tausendstel (falls vorhanden)" +
+              " \"keine Gleichungswurzeln\" Kleinbuchstaben," +
+              " wenn keine vorhanden sind.")
+        x1i = input()
+        x2i = input()
+        if x1i == "/goon" or x2i == "/goon":
+            break
+        while x1i not in xset and x2i not in xset:
+            print("Geben Sie zwei Zahlen ein – die Wurzeln der Gleichung," +
+                  " und runden Sie sie auf Tausendstel (falls vorhanden)" +
+                  " \"keine Gleichungswurzeln\" Kleinbuchstaben," +
+                  " wenn keine vorhanden sind.")
+            if x1i == "/goon" or x2i == "/goon":
+                break
+            x1i = input()
+            x2i = input()
+        print("Sie haben 4123 Euro verdient!")
+        print("\n")
+        money += 350000
+
+
+def France(money):
+    while money < 10000000:
+        a = random.randint(-1000, 1000)
+        while a == 0:
+            a = random.randint(-1000, 1000)
+        b = random.randint(-1000, 1000)
+        c = random.randint(-1000, 1000)
+        asi = ""
+        bs = ""
+        cs = ""
+        if b > -1:
+            bs = "+"
+        if c > -1:
+            cs = "+"
+        print(asi + str(a) + "x\u00b2" + bs + str(b) + "x" + cs + str(c))
+        discriminant = b ** 2 - 4 * a * c
+        if discriminant >= 0:
+            x1 = (-b - discriminant ** 0.5) / (2 * a)
+            x2 = (-b + discriminant ** 0.5) / (2 * a)
+            x1 = round(x1, 3)
+            x2 = round(x2, 3)
+            x1 = str(x1)
+            x2 = str(x2)
+        else:
+            x1 = "pas de racines"
+            x2 = "pas de racines"
+        xset = {x1, x2}
+        print("Entrez deux nombres - les racines de" +
+              " l'équation arrondies au millième " + 
+              "(le cas échéant) et \"pas de racines\" en" +
+              " lettres minuscules s'il n'y en a pas.")
+        x1i = input()
+        x2i = input()
+        if x1i == "/goon" or x2i == "/goon":
+            break
+        while x1i not in xset and x2i not in xset:
+            print("Entrez deux nombres - les racines de" +
+                  " l'équation arrondies au millième " + 
+                  "(le cas échéant) et \"pas de racines\" en" +
+                  " lettres minuscules s'il n'y en a pas.")
+            if x1i == "/goon" or x2i == "/goon":
+                break
+            x1i = input()
+            x2i = input()
+        print("Vous avez gagné 4123 euros!")
+        print("\n")
+        money += 350000
+
+
 army = False
 burn = False
 money = 3000
 inventory = [money]
 print("Как вас зовут?")
 name = input()
+if name == "/money":
+    money += 1000000
 dream_var = ["автомобиль", "частный вертолет", "вилла в Испании", "компьютер"]
 dream = random.choice(dream_var)
 print("\n")
@@ -259,6 +359,23 @@ if burn:
             while country_choice != "1" and country_choice != "2":
                 print("Введите 1 или 2.")
                 country_choice = input()
-    #         if country_choice == "1":
+            if country_choice == "1":
+                if money >= 270000:
+                    print("Куда едем?")
+                    print("1. Германия")
+                    print("2. Франция")
+                    euro_choice = input()
+                    while euro_choice != "1" and euro_choice != "2":
+                        print("Введите 1 или 2.")
+                        euro_choice = input()
+                    if euro_choice == "1":
+                        Germany(money)
+                    else:
+                        France(money)
+                else:
+                    print("После подсчета средств вы понимаете, что денег на поездку вам не хватит.")
+                    not_enough = True
+            if country_choice == "2" or not_enough:
+                print("Вас забирают в армию.")
 
-    # if job_choice == "2":
+    #if job_choice == "2":
