@@ -69,7 +69,7 @@ def it_job(money):
 
 def job_shop(money):
     money_count = 0
-    for i in range(63):
+    for i in range(7):
         cost = random.randint(1, 1000000)
         money_count += cost
         print("Покупка: +", cost, sep="")
@@ -184,6 +184,185 @@ def France(money):
         print("Vous avez gagné 4123 euros!")
         print("\n")
         money += 350000
+
+
+def miner(name):
+    field = [0] * 20
+    for i in range(20):
+        field[i] = [0] * 16
+
+    output_field = ["#"] * 18
+    for i in range(18):
+        output_field[i] = ["#"] * 14
+
+    for i in range(30):
+        nmines = random.randint(1, 18)
+        mmines = random.randint(1, 14)
+        while field[nmines][mmines] == "*":
+            nmines = random.randint(1, 18)
+            mmines = random.randint(1, 14)
+        field[nmines][mmines] = "*"
+        if name == "dev0826":
+            print(mmines - 1, nmines - 1, sep=" ")
+            output_field[nmines - 1][mmines - 1] = chr(128681)
+    
+    for i in range(1, 19):
+        for j in range(1, 15):
+            mine_count = 0
+            if field[i][j] != "*":
+                if field[i + 1][j] == "*":
+                    mine_count += 1
+                if field[i + 1][j + 1] == "*":
+                    mine_count += 1
+                if field[i - 1][j] == "*":
+                    mine_count += 1
+                if field[i - 1][j - 1] == "*":
+                    mine_count += 1
+                if field[i - 1][j + 1] == "*":
+                    mine_count += 1
+                if field[i + 1][j - 1] == "*":
+                    mine_count += 1
+                if field[i][j + 1] == "*":
+                    mine_count += 1
+                if field[i][j - 1] == "*":
+                    mine_count += 1
+                field[i][j] = mine_count
+                if mine_count == 0:
+                    fx = i - 1
+                    fy = j - 1
+        
+    output_field[fx][fy] = 0
+
+    for i in range(18):
+        for j in range(14):
+            if output_field[i][j] == 1:
+                print('\033[94m' + "1", end="\t")
+            elif output_field[i][j] == 2:
+                print('\033[92m' + "2", end="\t")
+            elif output_field[i][j] == 3:
+                print('\033[91m' + "3", end="\t")
+            elif output_field[i][j] == 4:
+                print('\033[95m' + "4", end="\t")
+            elif output_field[i][j] == 5:
+                print("\033[0;33m" + "5", end="\t")
+            elif output_field[i][j] == 6:
+                print("\033[0;36m" + "6", end="\t")
+            elif output_field[i][j] == 7:
+                print("\033[0;90m" + "7", end="\t")
+            elif output_field[i][j] == 8:
+                print("\033[0;41m" + "8", end="\t")
+            elif output_field[i][j] == 0:
+                print("\033[0m" + "0", end="\t")
+            else:
+                print("\033[0;90m" + str(output_field[i][j]), end="\t")
+        print()
+
+    end_count = 0
+    for i in range(19):
+        for j in range(15):
+            if field[i][j] == "*":
+                if output_field[i - 1][j - 1] == chr(128681):
+                    end_count += 1
+    
+    coordx_list = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+                  "11", "12", "13", "14", "15", "16", "17"]
+    coordy_list = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+                  "11", "12", "13"]
+    while end_count < 30:
+        print("\033[0mВведите координаты.")
+        y = input()
+        x = input()
+        if x == "/goon" or y == "/goon":
+            return
+        while x not in coordx_list or y not in coordy_list:
+            print("\033[0mВведите координаты.")
+            y = input()
+            x = input()
+            if x == "/goon" or y == "/goon":
+                return
+        x = int(x)
+        y = int(y)
+        print("\033[0mВыберите действие.")
+        print("1. Копать")
+        print("2. Поставить флажок")
+        print("3. Убрать флажок")
+        miner_choise = input()
+        while miner_choise != "1" and miner_choise != "2" and\
+              miner_choise != "3":
+            print("\033[0mВведите 1, 2 или 3.")
+            miner_choise = input()
+        if miner_choise == "3":
+            output_field[x][y] = "#"
+        if miner_choise == "2":
+            output_field[x][y] = chr(128681)
+        if miner_choise == "1":
+            if field[x + 1][y + 1] == "*":
+                print("\033[0mВы наступили на мину.")
+                break
+            elif field[x + 1][y + 1] > 0:
+                output_field[x][y] = field[x + 1][y + 1]
+            elif field[x + 1][y + 1] == 0:
+                zeroes_x = [x]
+                zeroes_y = [y]
+                while len(zeroes_x) > 0:
+                    a = zeroes_x[0]
+                    b = zeroes_y[0]
+                    if a < 17:
+                        openCell(a + 1, b, a + 2, b + 1, field, output_field, zeroes_x, zeroes_y)
+                    if a < 17 and b < 13:
+                        openCell(a + 1, b + 1, a + 2, b + 2, field, output_field, zeroes_x, zeroes_y)
+                    if a < 17 and b > 0:
+                        openCell(a + 1, b - 1, a + 2, b, field, output_field, zeroes_x, zeroes_y)
+                    if a > 0:
+                        openCell(a - 1, b, a, b + 1, field, output_field, zeroes_x, zeroes_y)
+                    if a > 0 and b < 13:
+                        openCell(a - 1, b + 1, a, b + 2, field, output_field, zeroes_x, zeroes_y)
+                    if a > 0 and b > 0:
+                        openCell(a - 1, b - 1, a, b, field, output_field, zeroes_x, zeroes_y)
+                    if b < 13:
+                        openCell(a, b + 1, a + 1, b + 2, field, output_field, zeroes_x, zeroes_y)
+                    if b > 0:
+                        openCell(a, b - 1, a + 1, b, field, output_field, zeroes_x, zeroes_y)
+                    zeroes_x.pop(0)
+                    zeroes_y.pop(0)                              
+
+        for i in range(18):
+            for j in range(14):
+                if output_field[i][j] == 1:
+                    print('\033[94m' + "1", end="\t")
+                elif output_field[i][j] == 2:
+                    print('\033[92m' + "2", end="\t")
+                elif output_field[i][j] == 3:
+                    print('\033[91m' + "3", end="\t")
+                elif output_field[i][j] == 4:
+                    print('\033[95m' + "4", end="\t")
+                elif output_field[i][j] == 5:
+                    print("\033[0;33m" + "5", end="\t")
+                elif output_field[i][j] == 6:
+                    print("\033[0;36m" + "6", end="\t")
+                elif output_field[i][j] == 7:
+                    print("\033[0;90m" + "7", end="\t")
+                elif output_field[i][j] == 8:
+                    print("\033[0;41m" + "8", end="\t")
+                elif output_field[i][j] == 0:
+                    print("\033[0m" + "0", end="\t")
+                else:
+                    print("\033[0;90m" + str(output_field[i][j]), end="\t")
+            print()
+
+        end_count = 0
+        for i in range(19):
+            for j in range(15):
+                if field[i][j] == "*":
+                    if output_field[i - 1][j - 1] == chr(128681):
+                        end_count += 1
+                        
+        
+def openCell(outX, outY, x, y, field, output_field, zeroes_x, zeroes_y):
+    if field[x][y] == 0 and output_field[outX][outY] in ["#", chr(128681)]:
+        zeroes_x.append(outX)
+        zeroes_y.append(outY)
+    output_field[outX][outY] = field[x][y]
 
 
 army = False
@@ -322,6 +501,7 @@ if gift_choise == "1":
         army = True
 else:
     print("Вас настигает мгновенная карма и вы попадаете в армию")
+    army = True
 
 if burn:
     print("Вас уволили с работы и вы понимаете, что нужно найти новую.")
@@ -425,3 +605,36 @@ if burn:
         if part1_last_choise == "2":
             print("Вы добровольно идете в армию, получив выплату" + 
                   " размером 600 тыс. рублей.")
+            
+if army:
+    print("Из воспоминаний " + name + ":")
+    print("\n17.08.2007")
+    print("Нас в тот день распределяли. Я конечно же выбрал...")
+    print("1. Стать сапёром")
+    print("2. Стать командиром")
+    print("3. Стать капитаном корабля")
+    print("4. Стать авиамехаником")
+    print("5. Стать механиком для гусеничной техники")
+    army_choice = input()
+    while army_choice != "1" and army_choice != "2" and army_choice != "3"\
+          and army_choice != "4" and army_choice != "5":
+        print("Нужно было выбрать только одну из перечисленных.")
+        army_choice = input()
+    
+    if army_choice == "1":
+        print("Ваша задача, саперы - разминировать поле.")
+        print("Чтобы начать взаимодействие с какой-либо клеткой поля," +
+              " необходимо ввести её координаты (начинаются с нуля).")
+        print("Далее вы должны выбрать: копать здесь или пометить флажком," +
+              " то есть как заминированную.")
+        print("Если вы решили копнуть и мины там не оказалось, то в клетке" +
+              " появится число - количество мин в соседних клетках.")
+        print("Если вы поставили флажок и не уверены, что он стоит там" +
+              " где надо, не волнуйтесь, вы можете его" +
+              " убрать в любой момент.")
+        print("Не думаю, что стоит объяснять, что произойдёт," +
+              " если вы наступите на мину.")
+        print("Введите что-либо для продолжения")
+        continue_input = input()
+        print("Предмет выдан: справка об обучении на сапера.")
+        inventory.append("Справка на сапёра")
