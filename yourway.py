@@ -299,13 +299,14 @@ def miner(name, inventory):
             if output_field[x][y] == chr(128681):
                 flag_count += 1
             output_field[x][y] = "#"
+            print("Флажков осталось:", flag_count)
         if miner_choise == "2":
             if output_field[x][y] != chr(128681):
                 flag_count -= 1
             if flag_count > 0:
                 output_field[x][y] = chr(128681)
-            else:
-                print("Нет флажков.")
+            print("Флажков осталось:", flag_count)
+            
         if miner_choise == "1":
             if field[x + 1][y + 1] == "*":
                 print("\033[0mВы наступили на мину.")
