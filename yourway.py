@@ -317,6 +317,7 @@ def miner(name, inventory):
                 zeroes_x = [x]
                 zeroes_y = [y]
                 while len(zeroes_x) > 0:
+                    output_field[x][y] = field[x + 1][y + 1]
                     a = zeroes_x[0]
                     b = zeroes_y[0]
                     if a < 17:
@@ -650,7 +651,7 @@ if army:
         print("Предмет выдан: справка об обучении на сапера.")
         inventory.append("Справка на сапёра")
 
-    if army_choice == "3":
+    if army_choice == "4":
         print("Ваша задача, капитаны, уничтожить флот противника.")
         print("Чтобы начать взаимодействие с какой-либо клеткой поля," +
               " необходимо ввести её координаты (начинаются с нуля).")
@@ -663,3 +664,6 @@ if army:
         print("Предмет выдан: справка об обучении на" +
               " капитана морского судна.")
         inventory.append("Справка на капитана")
+
+    if army_choice == "3":
+        print("")
