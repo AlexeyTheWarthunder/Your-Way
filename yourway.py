@@ -186,7 +186,11 @@ def France(money):
         money += 350000
 
 
-def miner(name):
+def miner(name, inventory):
+    flag_count = 30
+    inventory.append(flag_count)
+    print("Вам выдано 30 флажков.")
+
     field = [0] * 20
     for i in range(20):
         field[i] = [0] * 16
@@ -292,9 +296,16 @@ def miner(name):
             print("\033[0mВведите 1, 2 или 3.")
             miner_choise = input()
         if miner_choise == "3":
+            if output_field[x][y] == chr(128681):
+                flag_count += 1
             output_field[x][y] = "#"
         if miner_choise == "2":
-            output_field[x][y] = chr(128681)
+            if output_field[x][y] != chr(128681):
+                flag_count -= 1
+            if flag_count > 0:
+                output_field[x][y] = chr(128681)
+            else:
+                print("Нет флажков.")
         if miner_choise == "1":
             if field[x + 1][y + 1] == "*":
                 print("\033[0mВы наступили на мину.")
@@ -356,7 +367,6 @@ def miner(name):
                 if field[i][j] == "*":
                     if output_field[i - 1][j - 1] == chr(128681):
                         end_count += 1
-                        
         
 def openCell(outX, outY, x, y, field, output_field, zeroes_x, zeroes_y):
     if field[x][y] == 0 and output_field[outX][outY] in ["#", chr(128681)]:
