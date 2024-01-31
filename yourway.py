@@ -401,6 +401,281 @@ def Azerbaijan(money):
     return money
 
 
+def sea_battle():
+    win = False
+    bot_field = ["~"] * 11
+    for i in range(11):
+        bot_field[i] = ["~"] * 11
+
+    obf = ["*"] * 12
+    for i in range(12):
+        obf[i] = ["*"] * 12
+        for k in range(1, 11):
+            obf[i][k] = "~"
+
+    player_field = ["~"] * 11
+    for i in range(11):
+        player_field[i] = ["~"] * 11
+
+    opf = ["*"] * 12
+    for i in range(12):
+        opf[i] = ["*"] * 12
+        for k in range(1, 11):
+            opf[i][k] = "~"
+
+    coord_list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+    print("Расставить корабли самостоятельно?")
+    print("1. Да")
+    print("2. Нет")
+    place_choice = input()
+    while place_choice not in ["1", "2"]:
+        print("Введите 1 или 2")
+        place_choice = input()
+
+    if place_choice == "1":
+        ship_place(4, coord_list, opf)
+        ship_place(3, coord_list, opf)
+        ship_place(3, coord_list, opf)
+        ship_place(2, coord_list, opf)
+        ship_place(2, coord_list, opf)
+        ship_place(2, coord_list, opf)
+        ship_place(1, coord_list, opf)
+        ship_place(1, coord_list, opf)
+        ship_place(1, coord_list, opf)
+        ship_place(1, coord_list, opf)
+    else:
+        bot_ship_place(4, opf)
+        bot_ship_place(3, opf)
+        bot_ship_place(3, opf)
+        bot_ship_place(2, opf)
+        bot_ship_place(2, opf)
+        bot_ship_place(2, opf)
+        bot_ship_place(1, opf)
+        bot_ship_place(1, opf)
+        bot_ship_place(1, opf)
+        bot_ship_place(1, opf)
+
+    bot_ship_place(4, obf)
+    bot_ship_place(3, obf)
+    bot_ship_place(3, obf)
+    bot_ship_place(2, obf)
+    bot_ship_place(2, obf)
+    bot_ship_place(2, obf)
+    bot_ship_place(1, obf)
+    bot_ship_place(1, obf)
+    bot_ship_place(1, obf)
+    bot_ship_place(1, obf)
+
+
+    show_fields(obf, opf)
+
+    pl = 0
+    bot = 0
+    while pl < 20 and bot < 20:
+        bot = bot_step(opf, bot)
+        pl = player_step(obf, opf, pl, coord_list)
+        # pl = bot_step(obf, pl)
+        show_fields(obf, opf)
+
+    if pl == 20:
+        win = True
+    return win
+
+def show_fields(obf, opf):
+    print("   1 2 3 4 5 6 7 8 9 10           1 2 3 4 5 6 7 8 9 10")
+    for i in range(1, 11):
+        print(f'{i:2d}', end=" ")
+        for j in range(1, 11):
+            print(opf[i][j], end=" ")
+        print(f'        {i:2d}', end=" ")
+        for j in range(1, 11):
+            if obf[i][j] == chr(9634):
+                print("~", end=" ")
+            else:
+                print(obf[i][j], end=" ")          
+
+        # print(f'        {i:2d}', end=" ")
+        # for j in range(1, 11):
+        #     print(obf[i][j], end=" ")      
+        print()
+       # input()
+        
+
+def ship_place(lenght, coord_list, field):
+
+    while True:
+        x = 0
+        y = 0
+        ships = False
+
+        while x not in coord_list or y not in coord_list:
+            print("Введите координаты.")
+            y = input()
+            x = input()
+
+        x = int(x)
+        y = int(y)
+        place = False
+        print("Как поставить корабль?")
+        print("1. Вертикально")
+        print("2. Горизонтально")
+
+        ship_choice = input()
+        while ship_choice not in ["1", "2"]:
+            print("Введите 1 или 2.")
+            ship_choice = input()
+
+        if ship_choice == "1":
+
+            if x + lenght > 10:
+                print("Корабль не помещается. Введите корректные координаты.")
+                continue
+
+            for i in range(x - 1, x + lenght + 1):
+                for j in range(y - 1, y + 2):
+                    if field[i][j] == chr(9634):
+                        ships = True
+        else:
+            if y + lenght > 10:
+                print("Корабль не помещается. Введите корректные координаты.")
+                continue
+
+            for i in range(x - 1, x + 2):
+                for j in range(y - 1, y + lenght + 1):
+                    if field[i][j] == chr(9634):
+                        ships = True
+
+        if ships:
+            print("Нельзя ставить корабли так близко друг к другу.")
+            continue
+        
+        if ship_choice == "1":
+            for i in range(x, x + lenght):
+                field[i][y] = chr(9634)
+        else:
+            for i in range(y, y + lenght):
+                field[x][i] = chr(9634)
+        
+        print("   1 2 3 4 5 6 7 8 9 10")
+        for i in range(1, 11):
+            print(f'{i:2d}', end=" ")
+            for j in range(1, 11):
+                print(field[i][j], end=" ")
+            print()
+        break
+
+
+def bot_ship_place(lenght, field):
+
+    while True:
+        ships = False
+
+        y = random.randint(1, 10)
+        x = random.randint(1, 10)
+
+        ship_choice = random.randint(1, 2)
+
+        if ship_choice == 1:
+
+            if x + lenght > 10:
+                continue
+
+            for i in range(x - 1, x + lenght + 1):
+                for j in range(y - 1, y + 2):
+                    if field[i][j] == chr(9634):
+                        ships = True
+        else:
+            if y + lenght > 10:
+                continue
+
+            for i in range(x - 1, x + 2):
+                for j in range(y - 1, y + lenght + 1):
+                    if field[i][j] == chr(9634):
+                        ships = True
+
+        if ships:
+            continue
+        
+        if ship_choice == 1:
+            for i in range(x, x + lenght):
+                field[i][y] = chr(9634)
+        else:
+            for i in range(y, y + lenght):
+                field[x][i] = chr(9634)
+        
+        print("   1 2 3 4 5 6 7 8 9 10")
+        for i in range(1, 11):
+            print(f'{i:2d}', end=" ")
+            for j in range(1, 11):
+                print(field[i][j], end=" ")
+            print()
+        break
+
+
+def bot_step(field, count):
+    x = random.randint(1, 10)
+    y = random.randint(1, 10)
+
+    while field[x][y] in ["X", "*"]:
+        x = random.randint(1, 10)
+        y = random.randint(1, 10)
+    
+    return bot_shot(field, count, x, y)
+
+
+def bot_shot(field, count, x, y):
+    if field[x][y] == "~":
+        field[x][y] = "*"
+        return count
+        
+    field[x][y] = "X"
+    field[x - 1][y - 1] = "*"
+    field[x - 1][y + 1] = "*"
+    field[x + 1][y - 1] = "*"
+    field[x + 1][y + 1] = "*"
+    count += 1
+
+
+    cells_list = []
+    if field[x][y + 1] not in ["X", "*"]:
+        cells_list.append((x, y + 1))
+    if field[x][y - 1] not in ["X", "*"]:
+        cells_list.append((x, y - 1))
+    if field[x + 1][y] not in ["X", "*"]:
+        cells_list.append((x + 1, y))
+    if field[x - 1][y] not in ["X", "*"]:
+        cells_list.append((x - 1, y))
+
+    if len(cells_list) == 0:
+        return bot_step(field, count)
+    else:
+        a, b = random.choice(cells_list)
+        return bot_shot(field, count, a, b)
+
+
+def player_step(field, bot_field, count, coord_list):
+    print("Введите координаты")
+    y = input()
+    x = input()
+    while x not in coord_list or y not in coord_list:
+        print("Введите координаты.")
+        y = input()
+        x = input()
+    x = int(x)
+    y = int(y)
+    
+    if field[x][y] == chr(9634):
+        field[x][y] = "X"
+        count += 1
+        if count < 20:
+            show_fields(field, bot_field)
+            return player_step(field, bot_field, count, coord_list)
+    elif field[x][y] == "~":
+        field[x][y] = "*"
+        
+    return count
+
+
 army = False
 burn = False
 not_enough = False
@@ -772,3 +1047,5 @@ if army:
             else:
                 print("Вы выжили.")
                 win = True
+        if army_choice == "3":
+            win = sea_battle()
