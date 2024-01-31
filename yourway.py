@@ -376,6 +376,26 @@ def openCell(outX, outY, x, y, field, output_field, zeroes_x, zeroes_y):
         zeroes_y.append(outY)
     output_field[outX][outY] = field[x][y]
 
+def Azerbaijan(money):
+    money_count = 0
+    for i in range(7):
+        cost = random.randint(1, 1000000)
+        money_count += cost
+        print("Aliş: +", cost, sep="")
+        print("Nömrəni çap edin - kassadaki pul məbləği.")
+        shop_money = input()
+        if shop_money == "/goon":
+            break
+        while shop_money != str(money_count):
+            print("Nömrəni çap edin - kassadaki pul məbləği.")
+            shop_money = input()
+            if shop_money == "/goon":
+                break
+        money += 42000
+        print("947 manat qazandiniz!")
+        print("\n")
+    return money
+
 
 army = False
 burn = False
@@ -617,6 +637,7 @@ if burn:
         if part1_last_choise == "2":
             print("Вы добровольно идете в армию, получив выплату" + 
                   " размером 600 тыс. рублей.")
+            army = True
             
 if army:
     print("Из воспоминаний " + name + ":")
@@ -704,3 +725,26 @@ if army:
         print("Предмет выдан: справка об обучении на" +
               " механика для гусеничной техники.")
         inventory.append("Справка на МдГТ")
+
+    print("Из воспоминаний", name, end=":")
+    print()
+    print("08.08.2008, Утро")
+    print("На этот раз я прекрасно помнил, что сегодня у Ивана День" +
+          " рождения. Я уже все спланировал: куда пойду, что куплю и т.д...")
+    print("...но все мои планы оборвал звук сирены.")
+    print("К нам в казарму зашел командир и сказал, что" +
+          " началась война и нас отправляют на фронт.")
+    print("Конечно, все были в шоке от такого поворота событий," +
+          " никто не хотел ехать на войну, и мы стали подумывать о бегстве.")
+    
+    print("Дезертировать?")
+    print("1. Да")
+    print("2. Нет")
+    run_choice = input()
+    while run_choice not in ["1", "2"]:
+        print("Введите 1 или 2.")
+        run_choice = input()
+    
+    if run_choice == "1":
+        print("Вариантов было немного и мы бежали в Азербайджан, где нашли дом и работу.")
+        Azerbaijan(money)
