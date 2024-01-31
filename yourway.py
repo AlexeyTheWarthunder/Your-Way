@@ -378,7 +378,7 @@ def openCell(outX, outY, x, y, field, output_field, zeroes_x, zeroes_y):
 
 def Azerbaijan(money):
     money_count = 0
-    for i in range(7):
+    for i in range(63):
         cost = random.randint(1, 1000000)
         money_count += cost
         print("Aliş: +", cost, sep="")
