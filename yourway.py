@@ -187,6 +187,7 @@ def France(money):
 
 
 def miner(name, inventory):
+    win = True
     flag_count = 30
     inventory.append(flag_count)
     print("Вам выдано 30 флажков.")
@@ -310,6 +311,7 @@ def miner(name, inventory):
         if miner_choise == "1":
             if field[x + 1][y + 1] == "*":
                 print("\033[0mВы наступили на мину.")
+                win = False
                 break
             elif field[x + 1][y + 1] > 0:
                 output_field[x][y] = field[x + 1][y + 1]
@@ -369,6 +371,8 @@ def miner(name, inventory):
                 if field[i][j] == "*":
                     if output_field[i - 1][j - 1] == chr(128681):
                         end_count += 1
+    return win
+        
         
 def openCell(outX, outY, x, y, field, output_field, zeroes_x, zeroes_y):
     if field[x][y] == 0 and output_field[outX][outY] in ["#", chr(128681)]:
@@ -672,6 +676,9 @@ if army:
         print("Предмет выдан: справка об обучении на сапера.")
         inventory.append("Справка на сапёра")
 
+    if army_choice == "2":
+        print("Обучение вам не понадобится.")
+
     if army_choice == "3":
         print("Ваша задача, капитаны, уничтожить флот противника.")
         print("Чтобы начать взаимодействие с какой-либо клеткой поля," +
@@ -746,5 +753,22 @@ if army:
         run_choice = input()
     
     if run_choice == "1":
-        print("Вариантов было немного и мы бежали в Азербайджан, где нашли дом и работу.")
+        print("Вариантов было немного и мы бежали в Азербайджан," +
+              " где нашли дом и работу.")
         Azerbaijan(money)
+    else:
+        print("Никто не хотел ждать и в этот же день нас" +
+              " отправили на задание.")
+        if army_choice == "1":
+            win = miner(name, inventory)
+        if army_choice == "2":
+            print("Для командования войсками необходимо было иметь звание" +
+                  " Капитана, поэтому нас отправили" +
+                  " обычными солдатами на фронт.")
+            alive = random.random()
+            if alive == 0:
+                print("Вы погибли.")
+                win = False
+            else:
+                print("Вы выжили.")
+                win = True
