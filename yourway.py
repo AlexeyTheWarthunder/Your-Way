@@ -926,6 +926,7 @@ def delete(elem, inv):
 army = False
 burn = False
 not_enough = False
+win = True
 money = 3000
 inventory = [money]
 print("Как вас зовут?")
