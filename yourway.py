@@ -1,5 +1,11 @@
 import random
 import time
+import math
+from datetime import datetime
+if __import__("platform").system() == "Windows":
+    kernel32 = __import__("ctypes").windll.kernel32
+    kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
+    del kernel32
 
 
 def job100000(money):
@@ -371,6 +377,8 @@ def miner(name, inventory):
                 if field[i][j] == "*":
                     if output_field[i - 1][j - 1] == chr(128681):
                         end_count += 1
+    if win:
+        print("Вы разминировали поле.")
     return win
         
         
@@ -379,6 +387,7 @@ def openCell(outX, outY, x, y, field, output_field, zeroes_x, zeroes_y):
         zeroes_x.append(outX)
         zeroes_y.append(outY)
     output_field[outX][outY] = field[x][y]
+
 
 def Azerbaijan(money):
     money_count = 0
@@ -479,7 +488,11 @@ def sea_battle():
 
     if pl == 20:
         win = True
+        print("Вы выиграли сражение!")
+    else:
+        print("Вы потерпели поражение.")
     return win
+
 
 def show_fields(obf, opf):
     print("   1 2 3 4 5 6 7 8 9 10           1 2 3 4 5 6 7 8 9 10")
@@ -674,6 +687,247 @@ def player_step(field, bot_field, count, coord_list):
         field[x][y] = "*"
         
     return count
+
+
+def tank_test():
+    win = False
+    for i in range(10):
+        probitie = random.randint(100, 1000)
+        normalization = random.randint(0, 15)
+        armor = random.randint(100, 1000)
+        ugol = random.randint(0, 80)
+        print("Пробитие:", probitie)
+        print("Нормализация:", normalization)
+        print("Толщина брони:", armor)
+        print("Угол наклона:", ugol)
+        prob = "2"
+        if probitie > armor * (1 / math.cos((ugol - normalization) / 57)):
+            prob = "1"
+        print("Есть пробитие?")
+        print("1. Да")
+        print("2. Нет")
+        ans_wer = input()
+        while ans_wer not in ["1", "2"]:
+            print("Введите 1 или 2.")
+            ans_wer = input()
+        if ans_wer == prob:
+            print("Верно!")
+            win = True
+        else:
+            print("Неверно.")
+            win = False
+            break
+    return win
+
+
+def avia_mech():
+    inventory = []
+    cr73 = 0
+    cr27 = 0
+    ckab = 0
+    cen = 0
+    cw = 0
+    eng = False
+    eng2 = False
+    wng = False
+    wng2 = False
+    crp = False
+    cab = False
+    r731 = False
+    r732 = False
+    r733 = False
+    r734 = False
+    r271 = False
+    r272 = False
+    r273 = False
+    r274 = False
+    kab1 = False
+    kab2 = False
+    pod = False
+    engine = ["Воздухозаборник", "Компрессор", "Турбина",
+              "Камера сгорания", "Форсажная камера", "Система охлаждения",
+              "Система управления вектором тяги", "Масляный бак"]
+
+    r73 = ["ИК-головка самонаведения", "Оперение", "Двигатель ракеты",
+           "Обшивка ракеты"]
+
+    r27et = ["РЛ ГСН", "Оперение", "Двигатель ракеты", "Обшивка ракеты"]
+
+    kab500 = ["Взрыватель", "Взрывчатое вещество", "ГСН", "Корпус бомбы"]
+
+    wing = ["Закрылок", "Топливный бак", "Стабилизаторы", "Стойка шасси"]
+    
+    podvesi = ["Ракета Р-73-1", "Ракета Р-73-2","Ракета Р-73-3",
+               "Ракета Р-73-4", "Ракета Р-27ЭТ-1", "Ракета Р-27ЭТ-2",
+               "Ракета Р-27ЭТ-3", "Ракета Р-27ЭТ-4", "Бомба КАБ-500-1",
+               "Бомба КАБ-500-2"]
+
+    cabine = ["Кресло-катапульта", "Панель управления", "Бронестекло", "РЛС"]
+
+    corpus = ["Обшивка", "Центральная стойка шасси", "Кабина", "Пушка",
+              "Воздушный тормоз"]
+
+    su35s = ["Двигатель-1", "Двигатель-2", "Крыло-1", "Крыло-2", "Корпус",
+             "Подвесное вооружение"]
+    
+    words = ["Карбюратор", "Пропеллер", "Радиатор", "Конденсатор",
+             "Ковш", "Фанерная доска", "Артём?",
+             "Турбореактивный вертолётный двигатель",
+             "Электронейтральный гусь Вася"]
+    
+    sklad = []
+    for i in range(37):
+        sklad.append(random.choice(words))
+
+    for i in engine:
+        sklad.append(i)
+    for i in engine:
+        sklad.append(i)
+    for i in r73:
+        sklad.append(i)
+    for i in r73:
+        sklad.append(i)
+    for i in r73:
+        sklad.append(i)
+    for i in r73:
+        sklad.append(i)
+    for i in r27et:
+        sklad.append(i)
+    for i in r27et:
+        sklad.append(i)
+    for i in r27et:
+        sklad.append(i)
+    for i in r27et:
+        sklad.append(i)
+    for i in kab500:
+        sklad.append(i)
+    for i in kab500:
+        sklad.append(i)
+    for i in wing:
+        sklad.append(i)
+    for i in wing:
+        sklad.append(i)
+    for i in corpus:
+        sklad.append(i)
+    for i in cabine:
+        sklad.append(i)
+    x = sklad.index("Кабина")
+    sklad.pop(x)
+    random.shuffle(sklad)
+    while inventory != su35s:
+        for i in sklad:
+            print(i, end=" ")
+        print()
+        print("Что берем?")
+        thing = input()
+        while thing not in sklad:
+            print("На складе этого нет")
+            thing = input()
+        if thing in words:
+            print("Это нам не нужно.")
+        else:
+            sklad.pop(sklad.index(thing))
+            inventory.append(thing)
+
+            if create(engine, eng, inventory):
+                delete(engine, inventory)
+                print("Двигатель собран.")
+                cen += 1
+                inventory.append("Двигатель-" + str(cen))
+            if create(engine, eng2, inventory):
+                delete(engine, inventory)
+                print("Двигатель собран.")
+                cen += 1
+                inventory.append("Двигатель-" + str(cen))
+            if create(wing, wng, inventory):
+                delete(wing, inventory)
+                cw += 1
+                print("Крыло собрано.")
+                inventory.append("Крыло-" + str(cw))
+            if create(wing, wng2, inventory):
+                delete(wing, inventory)
+                cw += 1
+                print("Крыло собрано.")
+                inventory.append("Крыло-" + str(cw))
+            if create(corpus, crp, inventory):
+                delete(corpus, inventory)
+                print("Корпус собран.")
+                inventory.append("Корпус")
+            if create(cabine, cab, inventory):
+                delete(cabine, inventory)
+                print("Кабина собрана.")
+                inventory.append("Кабина")
+            if create(r73, r731, inventory):
+                delete(r73, inventory)
+                cr73 += 1
+                print("Р-73 собрана.")
+                inventory.append("Ракета Р-73-" + str(cr73))
+            if create(r73, r732, inventory):
+                delete(r73, inventory)
+                cr73 += 1
+                print("Р-73 собрана.")
+                inventory.append("Ракета Р-73-" + str(cr73)) 
+            if create(r73, r733, inventory):
+                delete(r73, inventory)
+                cr73 += 1
+                print("Р-73 собрана.")
+                inventory.append("Ракета Р-73-" + str(cr73))
+            if create(r73, r734, inventory):
+                delete(r73, inventory)
+                cr73 += 1
+                print("Р-73 собрана.")
+                inventory.append("Ракета Р-73-" + str(cr73))
+            if create(r27et, r271, inventory):
+                delete(r27et, inventory)
+                cr27 += 1
+                print("Р-27ЭТ собрана.")
+                inventory.append("Ракета Р-27ЭТ-" + str(cr27))
+            if create(r27et, r272, inventory):
+                delete(r27et, inventory)
+                cr27 += 1
+                print("Р-27ЭТ собрана.")
+                inventory.append("Ракета Р-27ЭТ-" + str(cr27))
+            if create(r27et, r273, inventory):
+                delete(r27et, inventory)
+                cr27 += 1
+                print("Р-27ЭТ собрана.")
+                inventory.append("Ракета Р-27ЭТ-" + str(cr27))
+            if create(r27et, r274, inventory):
+                delete(r27et, inventory)
+                cr27 += 1
+                print("Р-27ЭТ собрана.")
+                inventory.append("Ракета Р-27ЭТ-" + str(cr27))
+            if create(kab500, kab1, inventory):
+                delete(kab500, inventory)
+                ckab += 1
+                print("КАБ-500 собрана.")
+                inventory.append("Бомба КАБ-500-" + str(ckab))
+            if create(kab500, kab2, inventory):
+                delete(kab500, inventory)
+                ckab += 1
+                print("КАБ-500 собрана.")
+                inventory.append("Бомба КАБ-500-" + str(ckab))   
+            if create(podvesi, pod, inventory):
+                delete(podvesi, inventory)
+                print("Подвесное вооружение собрано.")
+                inventory.append("Подвесное вооружение")
+    
+    print("Самолёт готов. Лететь можно.")
+
+
+def create(elem, check, inv):
+    for i in elem:
+        if i in inv:
+            check = True
+        else:
+            check = False
+            break
+    return check
+    
+
+def delete(elem, inv):
+    for i in elem:
+        inv.pop(inv.index(i))
 
 
 army = False
@@ -957,7 +1211,7 @@ if army:
     if army_choice == "3":
         print("Ваша задача, капитаны, уничтожить флот противника.")
         print("Чтобы начать взаимодействие с какой-либо клеткой поля," +
-              " необходимо ввести её координаты (начинаются с нуля).")
+              " необходимо ввести её координаты (начинаются с 1).")
         print("Убедившись, что вы указали правильные координаты, стреляйте.")
         print("Напоминаю, вы командуете эскадрой из 10 кораблей:" +
               " 1 линейный, 2 крейсера, 3 эсминца и 4 катера.")
@@ -1049,3 +1303,18 @@ if army:
                 win = True
         if army_choice == "3":
             win = sea_battle()
+        if army_choice == "4":
+            avia_mech()
+        if army_choice == "5":
+            win = tank_test()
+    
+    if win:
+        print("Задание выполнено!")
+
+print("Из воспоминаний", name, end=":")
+print("\n13.08.2008")
+print("Нам наконец объявили о конце наших мучений - война закончилась." +
+      " За год (с 08.08.2007 до 13.08.2008) на моём банковском счету " +
+      "накопилось достаточно денег, чтобы я мог исполнить свою мечту.")
+print(datetime.now())
+print("И сейчас у меня есть", dream, "и я счастлив.")
