@@ -807,7 +807,11 @@ def avia_mech():
     x = sklad.index("Кабина")
     sklad.pop(x)
     random.shuffle(sklad)
-    while inventory != su35s:
+    su = set()
+    su.update(su35s)
+    inv = set()
+    inv.update(inventory)
+    while inv != su:
         for i in sklad:
             print(i, end=" ")
         print()
