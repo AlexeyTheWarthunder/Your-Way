@@ -276,9 +276,9 @@ def miner(name, inventory):
                     end_count += 1
     
     coordx_list = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
-                  "11", "12", "13", "14", "15", "16", "17"]
+                   "11", "12", "13", "14", "15", "16", "17"]
     coordy_list = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
-                  "11", "12", "13"]
+                   "11", "12", "13"]
     while end_count < 30:
         print("\033[0mВведите координаты.")
         y = input()
@@ -298,8 +298,8 @@ def miner(name, inventory):
         print("2. Поставить флажок")
         print("3. Убрать флажок")
         miner_choise = input()
-        while miner_choise != "1" and miner_choise != "2" and\
-              miner_choise != "3":
+        while (miner_choise != "1" and miner_choise != "2" and 
+               miner_choise != "3"):
             print("\033[0mВведите 1, 2 или 3.")
             miner_choise = input()
         if miner_choise == "3":
@@ -475,7 +475,6 @@ def sea_battle():
     bot_ship_place(1, obf)
     bot_ship_place(1, obf)
 
-
     show_fields(obf, opf)
 
     pl = 0
@@ -506,13 +505,9 @@ def show_fields(obf, opf):
                 print("~", end=" ")
             else:
                 print(obf[i][j], end=" ")          
-
-        # print(f'        {i:2d}', end=" ")
-        # for j in range(1, 11):
-        #     print(obf[i][j], end=" ")      
+    
         print()
-       # input()
-        
+           
 
 def ship_place(lenght, coord_list, field):
 
@@ -528,7 +523,6 @@ def ship_place(lenght, coord_list, field):
 
         x = int(x)
         y = int(y)
-        place = False
         print("Как поставить корабль?")
         print("1. Вертикально")
         print("2. Горизонтально")
@@ -648,7 +642,6 @@ def bot_shot(field, count, x, y):
     field[x + 1][y + 1] = "*"
     count += 1
 
-
     cells_list = []
     if field[x][y + 1] not in ["X", "*"]:
         cells_list.append((x, y + 1))
@@ -757,7 +750,7 @@ def avia_mech():
 
     wing = ["Закрылок", "Топливный бак", "Стабилизаторы", "Стойка шасси"]
     
-    podvesi = ["Ракета Р-73-1", "Ракета Р-73-2","Ракета Р-73-3",
+    podvesi = ["Ракета Р-73-1", "Ракета Р-73-2", "Ракета Р-73-3",
                "Ракета Р-73-4", "Ракета Р-27ЭТ-1", "Ракета Р-27ЭТ-2",
                "Ракета Р-27ЭТ-3", "Ракета Р-27ЭТ-4", "Бомба КАБ-500-1",
                "Бомба КАБ-500-2"]
@@ -1182,8 +1175,8 @@ if army:
     print("4. Стать авиамехаником")
     print("5. Стать механиком для гусеничной техники")
     army_choice = input()
-    while army_choice != "1" and army_choice != "2" and army_choice != "3"\
-          and army_choice != "4" and army_choice != "5":
+    while (army_choice != "1" and army_choice != "2" and army_choice != "3" 
+           and army_choice != "4" and army_choice != "5"):
         print("Нужно было выбрать только одну из перечисленных.")
         army_choice = input()
     
