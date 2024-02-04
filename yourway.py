@@ -908,6 +908,10 @@ def avia_mech():
                 delete(podvesi, inventory)
                 print("Подвесное вооружение собрано.")
                 inventory.append("Подвесное вооружение")
+        su = set()
+        su.update(su35s)
+        inv = set()
+        inv.update(inventory)
     
     print("Самолёт готов. Лететь можно.")
 
